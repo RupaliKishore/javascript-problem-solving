@@ -1,0 +1,27 @@
+Sort By
+
+
+/**
+ * @param {Array} arr
+ * @param {Function} fn
+ * @return {Array}
+ */
+var sortBy = function(arr, fn) {
+    // Create a copy of the array
+    const sorted = [...arr];
+    
+    // Bubble sort implementation (stable)
+    for (let i = 0; i < sorted.length - 1; i++) {
+        for (let j = 0; j < sorted.length - i - 1; j++) {
+            const valA = fn(sorted[j]);
+            const valB = fn(sorted[j + 1]);
+            
+            if (valA > valB) {
+                // Swap
+                [sorted[j], sorted[j + 1]] = [sorted[j + 1], sorted[j]];
+            }
+        }
+    }
+    
+    return sorted;
+};
