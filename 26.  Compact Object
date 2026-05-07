@@ -1,0 +1,39 @@
+Compact Object
+
+
+
+
+/**
+ * @param {Object|Array} obj
+ * @return {Object|Array}
+ */
+var compactObject = function(obj) {
+    // Handle null or non-object values
+    if (obj === null || typeof obj !== 'object') {
+        return obj;
+    }
+    
+    // Handle arrays
+    if (Array.isArray(obj)) {
+        const result = [];
+        for (const item of obj) {
+            const compacted = compactObject(item);
+            if (Boolean(compacted)) {
+                result.push(compacted);
+            }
+        }
+        return result;
+    }
+    
+    // Handle objects
+    const result = {};
+    for (const key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            const compacted = compactObject(obj[key]);
+            if (Boolean(compacted)) {
+                result[key] = compacted;
+            }
+        }
+    }
+    return result;
+};
